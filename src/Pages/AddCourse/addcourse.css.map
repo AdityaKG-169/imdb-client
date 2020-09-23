@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,cAAc,CAAC;EAEd,gBAAgB,EAAE,OAAO;EACzB,KAAK,EAAE,IAAI;EACX,MAAM,EAAE,mBAAmB;CAW3B;;AAfD,AAMC,cANa,CAMb,yBAAyB,CAAC;EACzB,gBAAgB,EAAE,KAAK;EACvB,KAAK,EAAE,GAAG;EACV,MAAM,EAAE,IAAI;EACZ,QAAQ,EAAE,QAAQ;EAClB,GAAG,EAAE,GAAG;EACR,IAAI,EAAE,GAAG;EACT,SAAS,EAAE,qBAAqB;CAChC",
+    "sources": [
+        "addcourse.scss"
+    ],
+    "names": [],
+    "file": "addcourse.css"
+}
