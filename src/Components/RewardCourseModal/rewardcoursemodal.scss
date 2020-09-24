@@ -1,22 +1,35 @@
 .courseModal {
 	width: 400px;
 	height: auto;
-	background-color: #fff;
+	background-color: #000;
+	color: #fff;
+	padding: 10px;
+
+	& .courseModal__close-button {
+		font-size: 20px;
+		font-weight: 800;
+		cursor: pointer;
+		transform: rotate(90deg);
+		position: relative;
+		left: 370px;
+	}
 
 	& .courseModal__heading {
 		font-size: 22px;
-		color: black;
+		text-align: center;
 	}
 
-	& .courseModal__buttons {
-		display: flex;
-		width: 400px;
-		flex-wrap: wrap;
-		align-items: center;
-		justify-content: space-between;
+	& .courseModal__subHeading {
+		padding-left: 10px;
+		padding-right: 10px;
 
-		& > button {
-			margin: 5px;
+		& .subHeading__bold {
+			font-weight: 800;
 		}
+	}
+
+	.btn {
+		margin-top: 20px;
+		margin-bottom: 20px;
 	}
 }

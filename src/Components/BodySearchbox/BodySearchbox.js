@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./bodysearchbox.css";
 
 class BodySearchbox extends React.Component {
@@ -56,9 +57,11 @@ class BodySearchbox extends React.Component {
 				/>
 				<p className="search-container__add-course">
 					Completed A Course? Add it{" "}
-					<span className="add-course__text-link" onClick={this.addCourse}>
-						here
-					</span>
+					<Link to="/new">
+						<span className="add-course__text-link" onClick={this.addCourse}>
+							here
+						</span>
+					</Link>
 				</p>
 			</div>
 		);

@@ -1,7 +1,7 @@
 import React from "react";
 import { auth, signInWithGoogle } from "../../firebase/firebase";
 import NavSearchbox from "../NavSearchbox/NavSearchbox";
-
+import { Link } from "react-router-dom";
 const Navbar = (props) => {
 	return (
 		<nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -22,9 +22,11 @@ const Navbar = (props) => {
 
 			<div className="collapse navbar-collapse" id="navbarColor03">
 				<NavSearchbox />
-				<button type="button" className="btn btn-outline-success">
-					Add A Course
-				</button>
+				<Link to="/new">
+					<button type="button" className="btn btn-outline-success">
+						Add A Course
+					</button>
+				</Link>
 				{props.user ? (
 					<button
 						type="button"

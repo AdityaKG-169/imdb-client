@@ -1,16 +1,58 @@
 import React from "react";
 import "./rewardcoursemodal.css";
+import Loading from "../../assets/loading.svg";
 
 class RewardCourseModal extends React.Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 		this.state = {
-			isOther: false,
-			isSelected: false,
-			color: "white",
-			backgroundColor: "black",
+			rewardDomain: "",
+			message: "",
+			loading: false,
 		};
 	}
+
+	handleChange = (event) => {
+		this.setState({
+			rewardDomain: event.target.value.toLowerCase(),
+		});
+	};
+
+	handleSubmit = () => {
+		if (!window.localStorage.getItem("token") || !this.state.user)
+			return this.setState({
+				message: "You Need to login in order to Submit",
+			});
+
+		if (!this.state.rewardDomain)
+			return this.setState({
+				message: "Please Select One to Submit!",
+			});
+
+		this.setState(
+			{
+				loading: true,
+			},
+			() =>
+				fetch("https://courses-imdb-backend.herokuapp.com/chosereward", {
+					method: "PATCH",
+					headers: {
+						"Content-Type": "application/json",
+						authorization: window.localStorage.getItem("token"),
+					},
+					body: JSON.stringify({ rewardDomain: this.state.rewardDomain }),
+				})
+					.then((response) => response.json())
+					.then((data) => {
+						if (data.error) {
+							return this.setState({
+								loading: false,
+								message: data.error,
+							});
+						} else return this.props.closeModal();
+					})
+		);
+	};
 
 	render() {
 		const domains = [
@@ -23,50 +65,41 @@ class RewardCourseModal extends React.Component {
 
 		return (
 			<div className="courseModal">
+				<span
+					onClick={this.props.closeModal}
+					className="courseModal__close-button"
+				>
+					X
+				</span>
 				<p className="courseModal__heading">Get Free Courses of Your choice</p>
 				<p className="courseModal__subHeading">
-					Rate or Add new Courses and Get free courses. Chose your favourite
-					domain!
+					Rate or Add new Courses and Get{" "}
+					<span className="subHeading__bold">FREE</span> courses. Choose your{" "}
+					<span className="subHeading__bold">Favourite!</span>
 				</p>
-				<section className="courseModal__buttons">
-					{domains.map((i, j) => {
-						return (
-							<button
-								type="button"
-								style={{
-									color: this.state.color,
-									backgroundColor: this.state.backgroundColor,
-								}}
-								onSelect={() =>
-									this.setState({
-										color: "white",
-										backgroundColor: "black",
-									})
-								}
-								key={j}
-								class="btn btn-outline-primary"
-							>
-								{i}
-							</button>
-						);
-					})}
 
-					<button
-						type="button"
-						class="btn btn-outline-success"
-						onClick={() => this.setState({ isOther: true })}
-					>
-						Other
-					</button>
-				</section>
-				{this.state.isOther ? (
-					<input
-						type="text"
-						class="form-control"
-						placeholder="Enter Domain of your Choice"
-					/>
+				<select className="custom-select" onClick={this.handleChange}>
+					<option disabled={true} selected={true}>
+						Select
+					</option>
+					{domains.map((i, j) => {
+						return <option key={j}>{i}</option>;
+					})}
+				</select>
+
+				<button className="btn btn-primary" onClick={this.handleSubmit}>
+					{this.state.loading ? (
+						<img src={Loading} width="25px" height="auto" />
+					) : (
+						"Submit"
+					)}
+				</button>
+				{this.state.message ? (
+					<div className="alert alert-dismissible alert-danger">
+						<strong>{this.state.message}</strong>
+					</div>
 				) : (
-					<span></span>
+					<div></div>
 				)}
 			</div>
 		);
