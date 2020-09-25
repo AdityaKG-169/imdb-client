@@ -5,8 +5,8 @@ import "./homepage.css";
 import { Spring } from "react-spring/renderprops";
 
 class Homepage extends React.Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 		this.state = {
 			modal: true,
 		};
@@ -17,6 +17,7 @@ class Homepage extends React.Component {
 		if (isModalClosed === "true") {
 			this.setState({
 				modal: false,
+				currentUser: this.props,
 			});
 		}
 	}
@@ -33,6 +34,7 @@ class Homepage extends React.Component {
 	render() {
 		return (
 			<div className="homepage">
+				{console.log(this.props.user)}
 				<section className="homepage__hero-section">
 					<BodySearchbox />
 					{this.state.modal ? (
@@ -44,7 +46,10 @@ class Homepage extends React.Component {
 							{(props) => (
 								<div style={props}>
 									<div className="courseModal__main-div">
-										<RewardCourseModal closeModal={this.closeModal} />
+										<RewardCourseModal
+											closeModal={this.closeModal}
+											user={this.props.user}
+										/>
 									</div>
 								</div>
 							)}

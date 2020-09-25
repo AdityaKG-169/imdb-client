@@ -1,9 +1,10 @@
 import React from "react";
 import "./addcourse.css";
+import PageNotFound from "../PageNotFound/PageNotFound";
 
 class Addcourse extends React.Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 		this.state = {
 			inList: true,
 			domains: [],
@@ -19,7 +20,7 @@ class Addcourse extends React.Component {
 	}
 
 	componentDidMount() {
-		fetch("http://localhost:3001/courses/domains")
+		fetch("http://localhost:8080/courses/domains")
 			.then((response) => response.json())
 			.then((data) => {
 				return this.setState({
@@ -56,7 +57,7 @@ class Addcourse extends React.Component {
 							() => {
 								if (this.state.inList) {
 									fetch(
-										`http://localhost:3001/courses/subdomains/${this.state.domain}`
+										`http://localhost:8080/courses/subdomains/${this.state.domain}`
 									)
 										.then((response) => response.json())
 										.then((data) => {
@@ -87,7 +88,7 @@ class Addcourse extends React.Component {
 			});
 		}
 
-		fetch("http://localhost:3001/course", {
+		fetch("http://localhost:8080/course", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -128,6 +129,12 @@ class Addcourse extends React.Component {
 	};
 
 	render() {
+		if (!this.props.user.currentUser || !window.localStorage.getItem("token"))
+			return (
+				<div>
+					<h1>You Need to Login In Order to Add New Course!</h1>
+				</div>
+			);
 		let onlyUnique = (value, index, self) => {
 			return self.indexOf(value) === index;
 		};
@@ -145,6 +152,7 @@ class Addcourse extends React.Component {
 
 		return (
 			<div className="addCourseHero">
+				{console.log(this.props)}
 				<div className="addCourse__subBackground">
 					<h1>Add a Course</h1>
 					<label htmlFor="exampleInputEmail1">Course Name</label>

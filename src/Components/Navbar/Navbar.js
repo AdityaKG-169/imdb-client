@@ -22,12 +22,13 @@ const Navbar = (props) => {
 
 			<div className="collapse navbar-collapse" id="navbarColor03">
 				<NavSearchbox />
+
 				<Link to="/new">
 					<button type="button" className="btn btn-outline-success">
 						Add A Course
 					</button>
 				</Link>
-				{props.user ? (
+				{props.user.currentUser ? (
 					<button
 						type="button"
 						className="btn btn-primary"

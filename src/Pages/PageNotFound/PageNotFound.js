@@ -1,11 +1,11 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 const PageNotFound = () => {
 	return (
 		<div>
 			<h1>
 				OOps! The Page You are Looking for does not exists. Return{" "}
-				<a href="/">Home</a>
+				<Link to="/">Home</Link>
 			</h1>
 		</div>
 	);

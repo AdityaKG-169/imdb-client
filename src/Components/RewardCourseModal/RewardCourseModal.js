@@ -9,6 +9,7 @@ class RewardCourseModal extends React.Component {
 			rewardDomain: "",
 			message: "",
 			loading: false,
+			currentUser: this.props.user,
 		};
 	}
 
@@ -19,7 +20,7 @@ class RewardCourseModal extends React.Component {
 	};
 
 	handleSubmit = () => {
-		if (!window.localStorage.getItem("token") || !this.state.user)
+		if (!window.localStorage.getItem("token") || !this.props.user.currentUser)
 			return this.setState({
 				message: "You Need to login in order to Submit",
 			});
@@ -34,11 +35,11 @@ class RewardCourseModal extends React.Component {
 				loading: true,
 			},
 			() =>
-				fetch("https://courses-imdb-backend.herokuapp.com/chosereward", {
+				fetch("http://localhost:8080/chosereward", {
 					method: "PATCH",
 					headers: {
 						"Content-Type": "application/json",
-						authorization: window.localStorage.getItem("token"),
+						authorization: "Bearer " + window.localStorage.getItem("token"),
 					},
 					body: JSON.stringify({ rewardDomain: this.state.rewardDomain }),
 				})
@@ -65,6 +66,7 @@ class RewardCourseModal extends React.Component {
 
 		return (
 			<div className="courseModal">
+				{console.log(this.props.user.currentUser)}
 				<span
 					onClick={this.props.closeModal}
 					className="courseModal__close-button"
