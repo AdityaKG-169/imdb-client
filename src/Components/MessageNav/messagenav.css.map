@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,MAAM,CAAC;EACN,MAAM,EAAE,CAAC;CAQT;;AATD,AAEC,MAFK,CAEH,IAAI,CAAC;EACN,WAAW,EAAE,GAAG;CAChB;;AAJF,AAMC,MANK,CAMH,aAAa,CAAC;EACf,gBAAgB,EAAE,OAAO;CACzB",
+    "sources": [
+        "messagenav.scss"
+    ],
+    "names": [],
+    "file": "messagenav.css"
+}

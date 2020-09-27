@@ -7,16 +7,27 @@ import PageNotFound from "./Pages/PageNotFound/PageNotFound";
 import { auth } from "./firebase/firebase";
 import Addcourse from "./Pages/AddCourse/Addcourse";
 import AdminPage from "./Pages/AdminPage/AdminPage";
+import AddBug from "./Pages/AddBug/AddBug";
+import AddAid from "./Pages/AddAid/AddAid";
+import Mousetrap from "mousetrap";
+import MessageNav from "./Components/MessageNav/MessageNav";
+
 class App extends React.Component {
 	constructor() {
 		super();
 		this.state = {
 			currentUser: null,
 			message: "",
+			navMessage: true,
 		};
 	}
 
+	handleNavMessage = () => {
+		this.setState({ navMessage: false });
+	};
+
 	componentDidMount() {
+		Mousetrap.bind("ctrl+b", () => (window.location.href = "/bug"));
 		if (window.localStorage.getItem("token")) {
 			this.setState({ currentUser: true });
 		}
@@ -62,6 +73,12 @@ class App extends React.Component {
 	render() {
 		return (
 			<div className="App">
+				{this.state.navMessage ? (
+					<MessageNav closeMessage={this.handleNavMessage} />
+				) : (
+					<div></div>
+				)}
+
 				<Navbar user={this.state} />
 				<Switch>
 					<Route
@@ -76,6 +93,11 @@ class App extends React.Component {
 					<Route
 						render={(props) => <AdminPage {...props} message={this.state} />}
 						path="/admin"
+					/>
+					<Route component={AddBug} path="/bug" />
+					<Route
+						render={(props) => <AddAid {...props} user={this.state} />}
+						path="/aid"
 					/>
 					<Route component={PageNotFound} path="*" />
 				</Switch>

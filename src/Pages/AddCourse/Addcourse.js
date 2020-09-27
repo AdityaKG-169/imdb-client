@@ -1,6 +1,6 @@
 import React from "react";
 import "./addcourse.css";
-import PageNotFound from "../PageNotFound/PageNotFound";
+import LoginRequired from "../LoginRequired/LoginRequired";
 
 class Addcourse extends React.Component {
 	constructor(props) {
@@ -20,6 +20,8 @@ class Addcourse extends React.Component {
 	}
 
 	componentDidMount() {
+		console.log("mounted");
+
 		fetch("http://localhost:8080/courses/domains")
 			.then((response) => response.json())
 			.then((data) => {
@@ -128,13 +130,13 @@ class Addcourse extends React.Component {
 			});
 	};
 
+	componentDidUpdate() {
+		console.log(this.props.user.currentUser);
+	}
+
 	render() {
 		if (!this.props.user.currentUser || !window.localStorage.getItem("token"))
-			return (
-				<div>
-					<h1>You Need to Login In Order to Add New Course!</h1>
-				</div>
-			);
+			return <LoginRequired />;
 		let onlyUnique = (value, index, self) => {
 			return self.indexOf(value) === index;
 		};
@@ -152,7 +154,7 @@ class Addcourse extends React.Component {
 
 		return (
 			<div className="addCourseHero">
-				{console.log(this.props)}
+				{console.log("Mounted0")}
 				<div className="addCourse__subBackground">
 					<h1>Add a Course</h1>
 					<label htmlFor="exampleInputEmail1">Course Name</label>

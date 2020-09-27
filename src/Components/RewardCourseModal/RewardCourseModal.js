@@ -66,7 +66,6 @@ class RewardCourseModal extends React.Component {
 
 		return (
 			<div className="courseModal">
-				{console.log(this.props.user.currentUser)}
 				<span
 					onClick={this.props.closeModal}
 					className="courseModal__close-button"
@@ -77,7 +76,7 @@ class RewardCourseModal extends React.Component {
 				<p className="courseModal__subHeading">
 					Rate or Add new Courses and Get{" "}
 					<span className="subHeading__bold">FREE</span> courses. Choose your{" "}
-					<span className="subHeading__bold">Favourite!</span>
+					<span className="subHeading__bold">Favourite </span>domain here!
 				</p>
 
 				<select className="custom-select" onClick={this.handleChange}>

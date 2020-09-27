@@ -1,0 +1,12 @@
+.alert {
+  margin: 0;
+}
+
+.alert span {
+  font-weight: 800;
+}
+
+.alert .span__button {
+  background-color: #afe8ff;
+}
+/*# sourceMappingURL=messagenav.css.map */

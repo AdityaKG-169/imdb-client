@@ -34,9 +34,10 @@ class Homepage extends React.Component {
 	render() {
 		return (
 			<div className="homepage">
-				{console.log(this.props.user)}
 				<section className="homepage__hero-section">
-					<BodySearchbox />
+					<div className="home__hero-container">
+						<BodySearchbox />
+					</div>
 					{this.state.modal ? (
 						<Spring
 							from={{ opacity: 0 }}
@@ -64,3 +65,5 @@ class Homepage extends React.Component {
 }
 
 export default Homepage;
+
+//<span>Photo by <a href="https://unsplash.com/@ilyapavlov?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Ilya Pavlov</a> on <a href="https://unsplash.com/t/technology?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>
